@@ -68,40 +68,78 @@ class Program
         int hunger_level = 1;
         int happiness_level = 6;
         int health_level = 9;
+        int time = 0;
+        int limit = 3;
 
         //
         while (true)
         {
+            if (time >= limit)
+            {
+                
+                Console.WriteLine($"{time} hours has passed. {petName}'s hunger has increased and happiness has decreased.");
+                if (hunger_level == 10)
+                {
+                    hunger_level = 10;
+                }
+                else
+                {
+                    hunger_level++;
+                }
+
+                if (happiness_level == 0)
+                {
+                    happiness_level = 0;
+                }
+                else
+                {
+                    happiness_level--;
+                }
+                time = 0; // Reset the time
+            }
+
             Console.WriteLine($"Main Menu: \n1. Feed {petName}\n2. Play with {petName}\n3. Let {petName} Rest");
             Console.WriteLine($"4. Check {petName}'s Status\n5. Exit\n");
             Console.Write("Enter your choice: ");
-            
 
+            
+            //takes integer input else throws exception
             if (int.TryParse(Console.ReadLine(), out petAction))
             {
                 switch(petAction)
                 {
-                    case 1:
-                        //Action for feeding the pet
-                        Console.WriteLine($"Thanks for feeding {petName}. His hunger is gonna decrease and health increases.");
-                        if (hunger_level == 0)
+                    case 1://Feed
+                        if (hunger_level == 10)
                         {
-                            hunger_level = 0;
+                            Console.WriteLine($"{petName} is refusing to eat as he is full right now");
+                            break;
                         }
                         else
                         {
-                            hunger_level --;
-                        }
+                            //Action for feeding the pet
+                            Console.WriteLine($"Thanks for feeding {petName}. His hunger is gonna decrease and health increases.");
+                            if (hunger_level == 0)
+                            {
+                                hunger_level = 0;
+                            }
+                            else
+                            {
+                                hunger_level--;
+                            }
 
-                        if (health_level == 10)
-                        {
-                            health_level = 10;
+                            if (health_level == 10)
+                            {
+                                health_level = 10;
+                            }
+                            else
+                            {
+                                health_level++;
+                            }
+                            time++;
+                            
+                            break;
                         }
-                        else
-                        {
-                            health_level++;
-                        }
-                        break;
+                        
                     case 2:
                         //Action for playing with pet
                         Console.WriteLine($"Thanks for playing with {petName}. His hunger level and happiness is going to increase.");
@@ -123,6 +161,7 @@ class Program
                         {
                             happiness_level++;
                         }
+                        time++;
                         break;
                     case 3:
                         //Action for resting the pet
@@ -145,22 +184,39 @@ class Program
                         {
                             happiness_level--;
                         }
+                        time++;
                         break;
                     case 4:
                         //Checking the status of the pet
                         Console.WriteLine("----------------");
                         Console.WriteLine($"{petName}'s Status: ");
                         Console.WriteLine("----------------");
-                        Console.WriteLine($"|Hunger:    {hunger_level}");
+                        Console.WriteLine($"|Hxunger:    {hunger_level}");
                         Console.WriteLine($"|Happiness: {happiness_level}");
                         Console.WriteLine($"|Health:    {health_level}");
-                        Console.WriteLine("----------------");
+                        Console.WriteLine("----------------\n");
+
+                        if (hunger_level <= 2)
+                        {
+                            Console.WriteLine($"Warning: {petName} is very hungry! Please feed them soon.\n");
+                        }
+                        if (happiness_level <= 2)
+                        {
+                            Console.WriteLine($"Warning: {petName} is feeling sad. Spend time playing with them.\n");
+                        }
+                        if (health_level <= 2)
+                        {
+                            Console.WriteLine($"Warning: {petName} is in poor health! Let them rest or care for them.\n2");
+                        }
+                        Console.WriteLine(time);
+       
                         break;
                     case 5:
                         //Exiting the game
-                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
+                        Console.WriteLine($"Thank you for playing with {petName}. Goodbye!");
                         return; //Exiting the program
                     default:
+                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 5.");
                         break;
                 }
             }
