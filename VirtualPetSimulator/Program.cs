@@ -27,17 +27,20 @@ class Program
                 //Checking the pet selected by user and asking for the name
                 if (pet_type == 1)
                 {
-                    Console.WriteLine($"You've chosen a {pet1}. What would you like to name your pet?");
+                    Console.WriteLine($"\nYou've chosen a {pet1}. What would you like to name your pet?\n");
+                    Console.Write("Name --> ");
                     break;
                 }
                 else if (pet_type == 2)
                 {
-                    Console.WriteLine($"You've chosen a {pet2}. What would you like to name your pet?");
+                    Console.WriteLine($"\nYou've chosen a {pet2}. What would you like to name your pet?\n");
+                    Console.Write("Name --> ");
                     break;
                 }
                 else if (pet_type == 3)
                 {
-                    Console.WriteLine($"You've chosen a {pet3}. What would you like to name your pet?");
+                    Console.WriteLine($"\nYou've chosen a {pet3}. What would you like to name your pet?\n");
+                    Console.Write("Name --> ");
                     break;
                 }
                 else
@@ -58,7 +61,6 @@ class Program
         //Getting the pet name from the user
         string petName = Console.ReadLine();
         Console.WriteLine("----------------------------------------");
-        Console.Write("Pet Name: ");
         Console.WriteLine($"Nice name, {petName}! Let's take a look on what we can do with {petName}.");
         Console.WriteLine("----------------------------------------");
 
@@ -69,7 +71,7 @@ class Program
         int happiness_level = 6;
         int health_level = 9;
         int time = 0;
-        int limit = 3;
+        int limit = 4;
 
         //
         while (true)
@@ -78,6 +80,17 @@ class Program
             {
                 
                 Console.WriteLine($"{time} hours has passed. {petName}'s hunger has increased and happiness has decreased.");
+                if (hunger_level >= 8)
+                {
+                    health_level = Math.Max(health_level - 1, 0);
+                    Console.WriteLine($"Warning: {petName} is too hungry! Their health is deteriorating.");
+                }
+                if (happiness_level <= 2)
+                {
+                    health_level = Math.Max(health_level - 1, 0);
+                    Console.WriteLine($"Warning: {petName} is feeling very unhappy! Their health is deteriorating.");
+                }
+
                 if (hunger_level == 10)
                 {
                     hunger_level = 10;
@@ -102,7 +115,7 @@ class Program
             Console.WriteLine($"4. Check {petName}'s Status\n5. Exit\n");
             Console.Write("Enter your choice: ");
 
-            
+
             //takes integer input else throws exception
             if (int.TryParse(Console.ReadLine(), out petAction))
             {
@@ -117,7 +130,9 @@ class Program
                         else
                         {
                             //Action for feeding the pet
+                            Console.WriteLine("----------------------------------------");
                             Console.WriteLine($"Thanks for feeding {petName}. His hunger is gonna decrease and health increases.");
+                            Console.WriteLine("----------------------------------------");
                             if (hunger_level == 0)
                             {
                                 hunger_level = 0;
@@ -142,7 +157,9 @@ class Program
                         
                     case 2:
                         //Action for playing with pet
+                        Console.WriteLine("----------------------------------------");
                         Console.WriteLine($"Thanks for playing with {petName}. His hunger level and happiness is going to increase.");
+                        Console.WriteLine("----------------------------------------");
 
                         if (hunger_level == 10)
                         {
@@ -165,7 +182,9 @@ class Program
                         break;
                     case 3:
                         //Action for resting the pet
+                        Console.WriteLine("----------------------------------------");
                         Console.WriteLine($"Thanks for letting {petName} rest. His health is now going to improve but happiness may decreses.");
+                        Console.WriteLine("----------------------------------------");
 
                         if (health_level == 10)
                         {
