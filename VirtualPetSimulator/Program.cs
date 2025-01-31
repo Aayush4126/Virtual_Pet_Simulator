@@ -11,7 +11,8 @@ class Program
         string pet3 = "Horse";
 
         //Displaying the welcome message 
-        Console.WriteLine("\n\n\n\n-----------------Welcome to Virtual Pet Simulator------------");
+        Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        Console.WriteLine("-----------------Welcome to Virtual Pet Simulator------------");
         Console.WriteLine("\n\n----------------------------------------");
         Console.WriteLine($"Please choose a type of pet: \n1. {pet1}\n2. {pet2}\n3. {pet3}");
         Console.WriteLine("----------------------------------------");
@@ -67,29 +68,20 @@ class Program
         int petAction;
 
         // Initializing the level of the pet
-        int hunger_level = 1;
-        int happiness_level = 6;
-        int health_level = 9;
+        int hunger_level = 5;
+        int happiness_level = 3;
+        int health_level = 5;
         int time = 0;
-        int limit = 4;
+        int limit = 3;
 
         //
         while (true)
         {
             if (time >= limit)
-            {
-                
+             { 
                 Console.WriteLine($"{time} hours has passed. {petName}'s hunger has increased and happiness has decreased.");
-                if (hunger_level >= 8)
-                {
-                    health_level = Math.Max(health_level - 1, 0);
-                    Console.WriteLine($"Warning: {petName} is too hungry! Their health is deteriorating.");
-                }
-                if (happiness_level <= 2)
-                {
-                    health_level = Math.Max(health_level - 1, 0);
-                    Console.WriteLine($"Warning: {petName} is feeling very unhappy! Their health is deteriorating.");
-                }
+                Console.WriteLine("----------------------------------------");
+               
 
                 if (hunger_level == 10)
                 {
@@ -108,9 +100,36 @@ class Program
                 {
                     happiness_level--;
                 }
-                time = 0; // Reset the time
+                time = 0; // Resetting the time
+            }
+            //Displays a warning if the pet is too hungry
+            if (hunger_level > 8)
+            {
+                health_level = Math.Max(health_level - 1, 0);
+                Console.WriteLine($"Warning: {petName} is too hungry! Their health is deteriorating.");
+                Console.WriteLine("----------------------------------------");
             }
 
+            if (hunger_level >= 8)
+            {
+                Console.WriteLine($"Warning: {petName} is very hungry! Please feed them soon.");
+                Console.WriteLine("----------------------------------------");
+            }
+
+            //Warns if pet is too unhappy
+            if (happiness_level <= 2)
+            {
+                Console.WriteLine($"Warning: {petName} is feeling sad. Spend time playing with them.");
+                Console.WriteLine("----------------------------------------");
+            }
+
+            if (health_level <= 2)
+            {
+                Console.WriteLine($"Warning: {petName} is in poor health! Let them rest or care for them.2");
+                Console.WriteLine("----------------------------------------");
+            }
+
+            Console.WriteLine("\n\n");
             Console.WriteLine($"Main Menu: \n1. Feed {petName}\n2. Play with {petName}\n3. Let {petName} Rest");
             Console.WriteLine($"4. Check {petName}'s Status\n5. Exit\n");
             Console.Write("Enter your choice: ");
@@ -210,25 +229,10 @@ class Program
                         Console.WriteLine("----------------");
                         Console.WriteLine($"{petName}'s Status: ");
                         Console.WriteLine("----------------");
-                        Console.WriteLine($"|Hxunger:    {hunger_level}");
+                        Console.WriteLine($"|Hunger:    {hunger_level}");
                         Console.WriteLine($"|Happiness: {happiness_level}");
                         Console.WriteLine($"|Health:    {health_level}");
                         Console.WriteLine("----------------\n");
-
-                        if (hunger_level <= 2)
-                        {
-                            Console.WriteLine($"Warning: {petName} is very hungry! Please feed them soon.\n");
-                        }
-                        if (happiness_level <= 2)
-                        {
-                            Console.WriteLine($"Warning: {petName} is feeling sad. Spend time playing with them.\n");
-                        }
-                        if (health_level <= 2)
-                        {
-                            Console.WriteLine($"Warning: {petName} is in poor health! Let them rest or care for them.\n2");
-                        }
-                        Console.WriteLine(time);
-       
                         break;
                     case 5:
                         //Exiting the game
